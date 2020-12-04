@@ -2,19 +2,29 @@
   "name": "casety-back",
   "version": "1.0.0",
   "description": "Creating the casety api",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mysql",
+    "restapi"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "homepage": "https://github.com/Casety-team/casety-back#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Casety-team/casety-back.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Casety-team/casety-back/issues"
-  },
-  "homepage": "https://github.com/Casety-team/casety-back#readme"
+  }
 }
