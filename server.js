@@ -1,16 +1,30 @@
-const express = require('express');
-const bodyParser= require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 
-app.use(bodyParser.json());
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
 
+app.use(cors(corsOptions));
+
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req,res) => {
-  res.json({ message: 'Welcome to Casety application' });
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to casety application." });
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
+
+const db = require('./app/models');
+db.squelize.sync();
+
+db.squelize.sync({ force: true }).then(() => {
+  console.log('Drop and re-sync db.')
 });
