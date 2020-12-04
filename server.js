@@ -1,14 +1,16 @@
-const http = require('http');
+const express = require('express');
+const bodyParser= require('body-parser');
 
-const hostname = '127.0.0.1';
-const port = process.env.PORT || 3000;
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Initialize project\n');
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/', (req,res) => {
+  res.json({ message: 'Welcome to Casety application' });
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
