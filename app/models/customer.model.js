@@ -12,7 +12,12 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: Sequelize.STRING
     },
-  });
+  }, 
+  {
+    paranoid: true,
+    timestamps: true
+  }
+  );
 
   return Customer;
 }

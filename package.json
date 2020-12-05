@@ -4,7 +4,7 @@
   "description": "Creating the casety api",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -31,5 +31,8 @@
   },
   "bugs": {
     "url": "https://github.com/Casety-team/casety-back/issues"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

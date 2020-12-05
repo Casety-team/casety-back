@@ -9,5 +9,5 @@ module.exports = app => {
   router.delete("/:id", customer.delete);
   router.delete("/", customer.deleteAll);
   
-  app.use('/api/customer', router);
+  app.use('/api/customers', router);
 };
