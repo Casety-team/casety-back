@@ -13,6 +13,9 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const db = require('./app/models');
+db.sequelize.sync();
+
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to casety application." });
 });
@@ -20,11 +23,4 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
-});
-
-const db = require('./app/models');
-db.squelize.sync();
-
-db.squelize.sync({ force: true }).then(() => {
-  console.log('Drop and re-sync db.')
 });
