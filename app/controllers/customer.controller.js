@@ -30,16 +30,26 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+exports.update = (req, res) => {
   const id = req.params.id;
 
-  Customer.findByPk(id)
-    .then(data => {
-      res.send(data);
+  Customer.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: 'Customer was updated successfully.'
+        });
+      } else {
+        res.send({
+          message: 'Cannot update Customer with id=${id}. Maybe Customer was not found or req.body is empty!'
+        });
+      }
     })
-    .catch(error => {
+    .catch(err => {
       res.status(500).send({
-        message: 'Error retrieving Customer with id=' + id
+        message: 'Error updating Customer with id=' + id
       });
     });
-}
+};
