@@ -29,3 +29,17 @@ exports.create = (req, res) => {
       });
     });
 };
+
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Customer.findByPk(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(500).send({
+        message: 'Error retrieving Customer with id=' + id
+      });
+    });
+}
