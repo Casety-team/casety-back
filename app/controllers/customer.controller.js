@@ -48,3 +48,27 @@ exports.findAll = (req, res) => {
       });
     });
 }
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Customer.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: 'Customer was updated successfully.'
+        });
+      } else {
+        res.send({
+          message: 'Cannot update Customer with id=${id}. Maybe Customer was not found or req.body is empty!'
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: 'Error updating Customer with id=' + id
+      });
+    });
+};
