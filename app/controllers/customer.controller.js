@@ -29,3 +29,22 @@ exports.create = (req, res) => {
       });
     });
 };
+
+exports.findAll = (req, res) => {
+  const firstname = req.query.firstname;
+  // const lastname = req.query.lastname;
+  // const email = req.query.email;
+  // const password = req.query.password;
+
+  let condition = firstname ? { firstname: { [Op.like]: `%${firstname}%` } } : null;
+  Customer.findAll({ where: condition })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(500).send({
+        message:
+          error.message || 'Some error occured while retrieving customers' 
+      });
+    });
+}
