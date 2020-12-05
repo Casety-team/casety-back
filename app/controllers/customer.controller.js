@@ -52,17 +52,16 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.findByPk(id)
+  Customer.findByPk(id)
     .then(data => {
       res.send(data);
     })
     .catch(error => {
       res.status(500).send({
-        message: "Error retrieving Tutorial with id=" + id
+        message: "Error retrieving Customer with id=" + id
       });
     });
 };
-
 
 exports.update = (req, res) => {
   const id = req.params.id;
@@ -88,3 +87,26 @@ exports.update = (req, res) => {
     });
 };
 
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Customer.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Customer was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Customer with id=${id}. Maybe Customer was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Customer with id=" + id
+      });
+    });
+};
