@@ -104,9 +104,25 @@ exports.delete = (req, res) => {
         });
       }
     })
-    .catch(err => {
+    .catch(error => {
       res.status(500).send({
         message: "Could not delete Customer with id=" + id
+      });
+    });
+};
+
+exports.deleteAll = (req, res) => {
+  Customer.destroy({
+    where: {},
+    truncate: false
+  })
+    .then(nums => {
+      res.send({ message: `${nums} Customers were deleted successfully!` });
+    })
+    .catch(error => {
+      res.status(500).send({
+        message:
+          error.message || "Some error occurred while removing all Customers."
       });
     });
 };
