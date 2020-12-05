@@ -49,6 +49,21 @@ exports.findAll = (req, res) => {
     });
 }
 
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Tutorial.findByPk(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id
+      });
+    });
+};
+
+
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -66,9 +81,10 @@ exports.update = (req, res) => {
         });
       }
     })
-    .catch(err => {
+    .catch(error => {
       res.status(500).send({
         message: 'Error updating Customer with id=' + id
       });
     });
 };
+
