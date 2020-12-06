@@ -19,9 +19,15 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.reserver = require("./reserver.model.js")(sequelize, Sequelize);
+//users token
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
+
+//reserver
+db.reserver = require("./reserver.model.js")(sequelize, Sequelize);
+
+//locker
+db.locker = require("./locker.model.js")(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
