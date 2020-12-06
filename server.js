@@ -27,9 +27,13 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to casety application." });
 });
 
-require("./app/routes/customer.routes")(app);
+//users
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+
+//reserver
+require("./app/routes/reserver.routes")(app);
+
 
 const PORT = process.env.PORT || 4545;
 app.listen(PORT, () => {

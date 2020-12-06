@@ -1,50 +1,44 @@
-const { sequelize } = require("../models");
 const db = require("../models");
-const Customer = db.customer;
+const Reserver = db.reserver;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-  if (!req.body.firstname){
+  if (!req.body.date_start, !req.body.date_end){
     res.status(400).send({
       message: 'Content can not be empty!'
     });
     return;
   }
 
-  const customer = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    password: req.body.password
+  const reserver = {
+    date_start: req.body.date_start,
+    date_end: req.body.date_end
   }
 
-  Customer.create(customer)
+  Reserver.create(reserver)
     .then(data =>{
       res.send(data);
     })
     .catch(error => {
       res.Status(500).send({
         message:
-          error.message || 'Some error occured while creating the customer' 
+          error.message || 'Some error occured while creating the reserver' 
       });
     });
 };
 
 exports.findAll = (req, res) => {
-  const firstname = req.query.firstname;
-  // const lastname = req.query.lastname;
-  // const email = req.query.email;
-  // const password = req.query.password;
+  const date_start = req.query.date_start;
 
-  let condition = firstname ? { firstname: { [Op.like]: `%${firstname}%` } } : null;
-  Customer.findAll({ where: condition })
+  let condition = date_start ? { date_start: { [Op.like]: `%${date_start}%` } } : null;
+  Reserver.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
     .catch(error => {
       res.status(500).send({
         message:
-          error.message || 'Some error occured while retrieving customers' 
+          error.message || 'Some error occured while retrieving reservers' 
       });
     });
 }
@@ -52,13 +46,13 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Customer.findByPk(id)
+  Reserver.findByPk(id)
     .then(data => {
       res.send(data);
     })
     .catch(error => {
       res.status(500).send({
-        message: "Error retrieving Customer with id=" + id
+        message: "Error retrieving reserver with id=" + id
       });
     });
 };
@@ -66,23 +60,23 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Customer.update(req.body, {
+  Reserver.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: 'Customer was updated successfully.'
+          message: 'Reserver was updated successfully.'
         });
       } else {
         res.send({
-          message: 'Cannot update Customer with id=${id}. Maybe Customer was not found or req.body is empty!'
+          message: 'Cannot update Reserver with id=${id}. Maybe Reserver was not found or req.body is empty!'
         });
       }
     })
     .catch(error => {
       res.status(500).send({
-        message: 'Error updating Customer with id=' + id
+        message: 'Error updating Reserver with id=' + id
       });
     });
 };
@@ -90,39 +84,39 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Customer.destroy({
+  Reserver.destroy({
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Customer was deleted successfully!"
+          message: "Reserver was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete Customer with id=${id}. Maybe Customer was not found!`
+          message: `Cannot delete Reserver with id=${id}. Maybe Reserver was not found!`
         });
       }
     })
     .catch(error => {
       res.status(500).send({
-        message: "Could not delete Customer with id=" + id
+        message: "Could not delete Reserver with id=" + id
       });
     });
 };
 
 exports.deleteAll = (req, res) => {
-  Customer.destroy({
+  Reserver.destroy({
     where: {},
     truncate: false
   })
     .then(nums => {
-      res.send({ message: `${nums} Customers were deleted successfully!` });
+      res.send({ message: `${nums} Reservers were deleted successfully!` });
     })
     .catch(error => {
       res.status(500).send({
         message:
-          error.message || "Some error occurred while removing all Customers."
+          error.message || "Some error occurred while removing all Reservers."
       });
     });
 };
