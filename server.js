@@ -34,6 +34,8 @@ require('./app/routes/user.routes')(app);
 //reserver
 require("./app/routes/reserver.routes")(app);
 
+//locker
+require("./app/routes/locker.routes")(app);
 
 const PORT = process.env.PORT || 4545;
 app.listen(PORT, () => {
