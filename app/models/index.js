@@ -32,6 +32,20 @@ db.locker = require("./locker.model.js")(sequelize, Sequelize);
 //location
 db.location = require("./location.model.js")(sequelize, Sequelize);
 
+//lockers foreign_key
+db.locker.belongsTo(db.location, {
+  through: "lockers",
+  foreignKey: "locationId",
+});
+
+//Reservers foreign_key
+db.locker.belongsToMany(db.user, {
+  through: "reservers",
+  foreignKey: "userId",
+  foreignKey: "lockerId"
+});
+
+//User_roles foreign_key
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
