@@ -37,6 +37,9 @@ require("./app/routes/reserver.routes")(app);
 //locker
 require("./app/routes/locker.routes")(app);
 
+//location
+require("./app/routes/location.routes")(app);
+
 const PORT = process.env.PORT || 4545;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

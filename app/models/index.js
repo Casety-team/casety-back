@@ -29,6 +29,9 @@ db.reserver = require("./reserver.model.js")(sequelize, Sequelize);
 //locker
 db.locker = require("./locker.model.js")(sequelize, Sequelize);
 
+//location
+db.location = require("./location.model.js")(sequelize, Sequelize);
+
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
@@ -40,6 +43,6 @@ db.user.belongsToMany(db.role, {
   otherKey: "roleId"
 });
 
-db.ROLES = ["user", "admin", "moderator"];
+db.ROLES = ["user", "moderator", "admin"];
 
 module.exports = db;
