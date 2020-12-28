@@ -6,7 +6,7 @@ var ovh = require('ovh')({
 
 ovh.request('POST', '/auth/credential', {
   'accessRules': [
-    { 'method': 'POST', 'path': ' /hosting/web/casetyi.cluster024.hosting.ovh.net/attachedDomain/api.casety.fr/restart'}
+    { 'method': 'POST', 'path': '/hosting/web/casetyi.cluster024.hosting.ovh.net/attachedDomain/api.casety.fr/restart'}
   ]
 }, function (error, credential) {
   console.log(error || credential);
