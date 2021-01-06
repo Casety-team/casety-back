@@ -1,8 +1,8 @@
 module.exports = {
-  HOST: process.env.database__connection__host || 'localhost'|| 'localhost',
-  PORT: process.env.database__connection__port || '8889'|| '',
+  HOST: process.env.database__connection__host || 'localhost',
+  PORT: process.env.database__connection__port || '',
   USER: process.env.database__connection__user || 'root',
-  PASSWORD: process.env.database__connection__password || 'root'|| '',
+  PASSWORD: process.env.database__connection__password || '',
   DB: process.env.database__connection__database || 'casety',
   dialect: "mysql",
   pool: {
