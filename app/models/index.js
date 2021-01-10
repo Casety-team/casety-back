@@ -32,6 +32,16 @@ db.locker = require("./locker.model.js")(sequelize, Sequelize);
 //location
 db.location = require("./location.model.js")(sequelize, Sequelize);
 
+//userBuy
+db.userBuy = require("./userBuy.model.js")(sequelize, Sequelize);
+
+
+//User_Buy foreign_key
+db.userBuy.belongsTo(db.user, {
+  through: "id",
+  foreignKey: "user_id",
+});
+
 //lockers foreign_key
 db.locker.belongsTo(db.location, {
   through: "lockers",
