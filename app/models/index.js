@@ -23,23 +23,33 @@ db.sequelize = sequelize;
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
 
-//reserver
-db.reserver = require("./reserver.model.js")(sequelize, Sequelize);
-
 //locker
 db.locker = require("./locker.model.js")(sequelize, Sequelize);
+//bike
+db.bike = require("./bike.model.js")(sequelize, Sequelize);
 
-//location
-db.location = require("./location.model.js")(sequelize, Sequelize);
+//Code
+db.code = require("./code.model.js")(sequelize, Sequelize);
 
 //userBuy
 db.userBuy = require("./userBuy.model.js")(sequelize, Sequelize);
 
+//reserver
+db.reserver = require("./reserver.model.js")(sequelize, Sequelize);
+
+//location
+db.location = require("./location.model.js")(sequelize, Sequelize);
 
 //User_Buy foreign_key
 db.userBuy.belongsTo(db.user, {
   through: "id",
   foreignKey: "user_id",
+});
+
+//bike foreign_key
+db.bike.belongsTo(db.location, {
+  through: "bikes",
+  foreignKey: "locationId",
 });
 
 //lockers foreign_key
@@ -48,10 +58,12 @@ db.locker.belongsTo(db.location, {
   foreignKey: "locationId",
 });
 
-//Reservers foreign_key
+
+//Reservers LockersID foreign_key
 db.locker.belongsToMany(db.user, {
   through: "reservers",
   foreignKey: "userId",
+  foreignKey: "bikeId",
   foreignKey: "lockerId"
 });
 
