@@ -18,10 +18,11 @@ const db = require('./app/models');
 db.sequelize.sync();
 const Role = db.role;
 
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
-  initial();
-});
+//Clear all data in dataBase
+// db.sequelize.sync({force: true}).then(() => {
+//   console.log('Drop and Resync Db');
+//   initial();
+// });
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to casety application." });
@@ -31,14 +32,20 @@ app.get("/", (req, res) => {
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 
-//reserver
-require("./app/routes/reserver.routes")(app);
-
 //locker
 require("./app/routes/locker.routes")(app);
 
+//bike
+require("./app/routes/bike.routes")(app);
+
 //location
 require("./app/routes/location.routes")(app);
+
+//code
+require("./app/routes/code.routes")(app);
+
+//reserver
+require("./app/routes/reserver.routes")(app);
 
 //shop
 require("./app/routes/shop.routes")(app);
