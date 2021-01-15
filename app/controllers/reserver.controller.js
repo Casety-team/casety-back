@@ -3,7 +3,7 @@ const Reserver = db.reserver;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-  if (!req.body.date_start, !req.body.date_end){
+  if (!buy, !req.body.date_start, !req.body.date_end){
     res.status(400).send({
       message: 'Content can not be empty!'
     });
@@ -11,6 +11,7 @@ exports.create = (req, res) => {
   }
 
   const reserver = {
+    buy: req.body.buy,
     date_start: req.body.date_start,
     date_end: req.body.date_end
   }
