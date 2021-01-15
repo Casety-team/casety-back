@@ -19,10 +19,10 @@ db.sequelize.sync();
 const Role = db.role;
 
 //Clear all data in dataBase
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync Db');
-//   initial();
-// });
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync Db');
+  initial();
+});
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to casety application." });
@@ -35,8 +35,8 @@ require('./app/routes/user.routes')(app);
 //locker
 require("./app/routes/locker.routes")(app);
 
-//bike
-require("./app/routes/bike.routes")(app);
+//lockers_types
+require("./app/routes/locker_type.routes")(app);
 
 //location
 require("./app/routes/location.routes")(app);
