@@ -12,7 +12,9 @@ exports.create = (req, res) => {
   }
 
   const locker = {
-    name: req.body.name
+    name: req.body.name,
+    locationId: req.body.locationId,
+    locker_type_id: req.body.locker_type_id
   }
 
   Locker.create(locker)

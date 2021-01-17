@@ -11,8 +11,13 @@ exports.create = (req, res) => {
     return;
   }
 
+  //update all form
   const locker_type = {
-    name: req.body.name
+    name: req.body.name,
+    length: req.body.length,
+    width: req.body.width,
+    height: req.body.height,
+    price: req.body.price
   }
 
   Locker_type.create(locker_type)
