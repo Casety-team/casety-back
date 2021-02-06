@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const db = require("../models");
 const stripe = require("stripe")(process.env.API_KEY_STRIPE);
 
@@ -22,4 +22,4 @@ exports.buy = async (req, res) => {
       success: false,
     });
   }
-}
+};

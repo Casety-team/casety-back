@@ -4,9 +4,19 @@ const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
   //!empty value
-  if (!req.body.name, !req.body.first_adress, !req.body.city, !req.body.zip_code, !req.body.transport, !req.body.opening_hours, !req.body.closing_hours){
+  if (
+    (!req.body.name,
+    !req.body.first_adress,
+    !req.body.city,
+    !req.body.zip_code,
+    !req.body.transport,
+    !req.body.opening_hours,
+    !req.body.closing_hours,
+    !req.body.latitude,
+    !req.body.longitude)
+  ) {
     res.status(400).send({
-      message: 'Content can not be empty!'
+      message: "Content can not be empty!",
     });
     return;
   }
@@ -19,17 +29,19 @@ exports.create = (req, res) => {
     zip_code: req.body.zip_code,
     transport: req.body.transport,
     opening_hours: req.body.opening_hours,
-    closing_hours: req.body.closing_hours
-  }
+    closing_hours: req.body.closing_hours,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+  };
 
   Location.create(location)
-    .then(data =>{
+    .then((data) => {
       res.send(data);
     })
-    .catch(error => {
+    .catch((error) => {
       res.Status(500).send({
         message:
-          error.message || 'Some error occured while creating the location' 
+          error.message || "Some error occured while creating the location",
       });
     });
 };
@@ -39,27 +51,27 @@ exports.findAll = (req, res) => {
 
   let condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
   Location.findAll({ where: condition })
-    .then(data => {
+    .then((data) => {
       res.send(data);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
         message:
-          error.message || 'Some error occured while retrieving locations' 
+          error.message || "Some error occured while retrieving locations",
       });
     });
-}
+};
 
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Location.findByPk(id)
-    .then(data => {
+    .then((data) => {
       res.send(data);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: "Error retrieving location with id=" + id
+        message: "Error retrieving location with id=" + id,
       });
     });
 };
@@ -68,22 +80,23 @@ exports.update = (req, res) => {
   const id = req.params.id;
 
   Location.update(req.body, {
-    where: { id: id }
+    where: { id: id },
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.send({
-          message: 'Location was updated successfully.'
+          message: "Location was updated successfully.",
         });
       } else {
         res.send({
-          message: 'Cannot update Location with id=${id}. Maybe Location was not found or req.body is empty!'
+          message:
+            "Cannot update Location with id=${id}. Maybe Location was not found or req.body is empty!",
         });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: 'Error updating Location with id=' + id
+        message: "Error updating Location with id=" + id,
       });
     });
 };
@@ -92,22 +105,22 @@ exports.delete = (req, res) => {
   const id = req.params.id;
 
   Location.destroy({
-    where: { id: id }
+    where: { id: id },
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Location was deleted successfully!"
+          message: "Location was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Location with id=${id}. Maybe Location was not found!`
+          message: `Cannot delete Location with id=${id}. Maybe Location was not found!`,
         });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: "Could not delete Location with id=" + id
+        message: "Could not delete Location with id=" + id,
       });
     });
 };
@@ -115,15 +128,15 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
   Location.destroy({
     where: {},
-    truncate: false
+    truncate: false,
   })
-    .then(nums => {
+    .then((nums) => {
       res.send({ message: `${nums} Locations were deleted successfully!` });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
         message:
-          error.message || "Some error occurred while removing all Locations."
+          error.message || "Some error occurred while removing all Locations.",
       });
     });
 };

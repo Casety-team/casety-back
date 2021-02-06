@@ -1,5 +1,5 @@
-const dbConfig = require('../config/db.config');
-const Sequelize = require('sequelize');
+const dbConfig = require("../config/db.config");
+const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -10,8 +10,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
-    idle: dbConfig.pool.idle
-  }
+    idle: dbConfig.pool.idle,
+  },
 });
 
 const db = {};
@@ -53,20 +53,20 @@ db.locker.belongsTo(db.locker_type, {
 //Reservers LockersID foreign_key
 db.locker.belongsToMany(db.user, {
   through: "reservers",
-      foreignKey: "userId",
-  foreignKey: "lockerId"
+  foreignKey: "userId",
+  foreignKey: "lockerId",
 });
 
 //User_roles foreign_key
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
-  otherKey: "userId"
+  otherKey: "userId",
 });
 db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
-  otherKey: "roleId"
+  otherKey: "roleId",
 });
 
 db.ROLES = ["user", "moderator", "admin"];

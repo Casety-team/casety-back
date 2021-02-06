@@ -5,8 +5,8 @@ const cors = require("cors");
 const app = express();
 
 let corsOptions = {
-  host : 'localhost',
-  port : 8080,
+  host: "localhost",
+  port: 8080,
 };
 
 app.use(cors(corsOptions));
@@ -14,13 +14,13 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = require('./app/models');
+const db = require("./app/models");
 db.sequelize.sync();
 const Role = db.role;
 
 //Clear all data in dataBase
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync Db');
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and Resync Db");
 //   initial();
 // });
 
@@ -29,8 +29,8 @@ app.get("/", (req, res) => {
 });
 
 //users
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
+require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
 
 //locker
 require("./app/routes/locker.routes")(app);
@@ -58,16 +58,16 @@ app.listen(PORT, () => {
 function initial() {
   Role.create({
     id: 1,
-    name: "user"
+    name: "user",
   });
- 
+
   Role.create({
     id: 2,
-    name: "moderator"
+    name: "moderator",
   });
- 
+
   Role.create({
     id: 3,
-    name: "admin"
+    name: "admin",
   });
 }

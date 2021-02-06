@@ -4,9 +4,9 @@ const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
   //!empty value
-  if (!req.body.name){
+  if (!req.body.name) {
     res.status(400).send({
-      message: 'Content can not be empty!'
+      message: "Content can not be empty!",
     });
     return;
   }
@@ -17,17 +17,17 @@ exports.create = (req, res) => {
     length: req.body.length,
     width: req.body.width,
     height: req.body.height,
-    price: req.body.price
-  }
+    price: req.body.price,
+  };
 
   Locker_type.create(locker_type)
-    .then(data =>{
+    .then((data) => {
       res.send(data);
     })
-    .catch(error => {
+    .catch((error) => {
       res.Status(500).send({
         message:
-          error.message || 'Some error occured while creating the locker_type' 
+          error.message || "Some error occured while creating the locker_type",
       });
     });
 };
@@ -37,27 +37,27 @@ exports.findAll = (req, res) => {
 
   let condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
   Locker_type.findAll({ where: condition })
-    .then(data => {
+    .then((data) => {
       res.send(data);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
         message:
-          error.message || 'Some error occured while retrieving locker_types' 
+          error.message || "Some error occured while retrieving locker_types",
       });
     });
-}
+};
 
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Locker_type.findByPk(id)
-    .then(data => {
+    .then((data) => {
       res.send(data);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: "Error retrieving locker_type with id=" + id
+        message: "Error retrieving locker_type with id=" + id,
       });
     });
 };
@@ -66,22 +66,23 @@ exports.update = (req, res) => {
   const id = req.params.id;
 
   Locker_type.update(req.body, {
-    where: { id: id }
+    where: { id: id },
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.send({
-          message: 'Locker_type was updated successfully.'
+          message: "Locker_type was updated successfully.",
         });
       } else {
         res.send({
-          message: 'Cannot update Locker_type with id=${id}. Maybe Locker_type was not found or req.body is empty!'
+          message:
+            "Cannot update Locker_type with id=${id}. Maybe Locker_type was not found or req.body is empty!",
         });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: 'Error updating Locker_type with id=' + id
+        message: "Error updating Locker_type with id=" + id,
       });
     });
 };
@@ -90,22 +91,22 @@ exports.delete = (req, res) => {
   const id = req.params.id;
 
   Locker_type.destroy({
-    where: { id: id }
+    where: { id: id },
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Locker_type was deleted successfully!"
+          message: "Locker_type was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Locker_type with id=${id}. Maybe Locker_type was not found!`
+          message: `Cannot delete Locker_type with id=${id}. Maybe Locker_type was not found!`,
         });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: "Could not delete Locker_type with id=" + id
+        message: "Could not delete Locker_type with id=" + id,
       });
     });
 };
@@ -113,15 +114,16 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
   Locker_type.destroy({
     where: {},
-    truncate: false
+    truncate: false,
   })
-    .then(nums => {
+    .then((nums) => {
       res.send({ message: `${nums} Locker_types were deleted successfully!` });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
         message:
-          error.message || "Some error occurred while removing all Locker_types."
+          error.message ||
+          "Some error occurred while removing all Locker_types.",
       });
     });
 };

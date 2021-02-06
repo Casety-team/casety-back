@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app) => {
   const reserver = require("../controllers/reserver.controller.js");
   let router = require("express").Router();
 
@@ -8,6 +8,6 @@ module.exports = app => {
   router.put("/:id", reserver.update);
   router.delete("/:id", reserver.delete);
   router.delete("/", reserver.deleteAll);
-  
-  app.use('/api/reservers', router);
+
+  app.use("/api/reservers", router);
 };

@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app) => {
   const code = require("../controllers/code.controller.js");
   let router = require("express").Router();
 
@@ -8,6 +8,6 @@ module.exports = app => {
   router.put("/:id", code.update);
   router.delete("/:id", code.delete);
   router.delete("/", code.deleteAll);
-  
-  app.use('/api/codes', router);
+
+  app.use("/api/codes", router);
 };
