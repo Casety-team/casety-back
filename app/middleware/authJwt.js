@@ -11,7 +11,6 @@ verifyToken = (req, res, next) => {
       message: "No token provided!",
     });
   }
-
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
@@ -32,7 +31,6 @@ isAdmin = (req, res, next) => {
           return;
         }
       }
-
       res.status(403).send({
         message: "Require Admin Role!",
       });
@@ -50,7 +48,6 @@ isModerator = (req, res, next) => {
           return;
         }
       }
-
       res.status(403).send({
         message: "Require Moderator Role!",
       });
@@ -66,13 +63,11 @@ isModeratorOrAdmin = (req, res, next) => {
           next();
           return;
         }
-
         if (roles[i].name === "admin") {
           next();
           return;
         }
       }
-
       res.status(403).send({
         message: "Require Moderator or Admin Role!",
       });
@@ -86,4 +81,5 @@ const authJwt = {
   isModerator: isModerator,
   isModeratorOrAdmin: isModeratorOrAdmin,
 };
+
 module.exports = authJwt;

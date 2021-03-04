@@ -20,12 +20,23 @@ const Role = db.role;
 
 //Clear all data in dataBase
 // db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and Resync Db");
-//   initial();
+// console.log("Drop and Resync Db");
+// Role.create({
+//   id: 1,
+//   name: "user",
+// })
+// Role.create({
+//   id: 2,
+//   name: "moderator",
+// })
+// Role.create({
+//   id: 3,
+//   name: "admin",
+// })
 // });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to casety application." });
+  res.json({ message: "Welcome to CASETY application." });
 });
 
 //users
@@ -54,20 +65,3 @@ const PORT = process.env.PORT || 4545;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-function initial() {
-  Role.create({
-    id: 1,
-    name: "user",
-  });
-
-  Role.create({
-    id: 2,
-    name: "moderator",
-  });
-
-  Role.create({
-    id: 3,
-    name: "admin",
-  });
-}

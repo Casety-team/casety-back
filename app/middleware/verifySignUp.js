@@ -15,7 +15,6 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
       });
       return;
     }
-
     next();
   });
 };
@@ -31,7 +30,6 @@ checkRolesExisted = (req, res, next) => {
       }
     }
   }
-
   next();
 };
 
