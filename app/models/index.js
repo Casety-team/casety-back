@@ -38,6 +38,9 @@ db.reserver = require("./reserver.model.js")(sequelize, Sequelize);
 //location
 db.location = require("./location.model.js")(sequelize, Sequelize);
 
+//basket
+db.basket = require("./basket.model.js")(sequelize, Sequelize);
+
 //lockers foreign_key
 db.locker.belongsTo(db.location, {
   through: "lockers",
@@ -51,11 +54,29 @@ db.locker.belongsTo(db.locker_type, {
 });
 
 //Reservers LockersID foreign_key
-db.locker.belongsToMany(db.user, {
+// db.locker.belongsToMany(db.user, {
+//   through: "reservers",
+//   foreignKey: "lockerId",
+//   otherKey: "userId",
+// });
+
+//Reservers foreign_key
+db.reserver.belongsTo(db.user, {
   through: "reservers",
   foreignKey: "userId",
+});
+
+//Reservers foreign_key
+db.reserver.belongsTo(db.locker, {
+  through: "reservers",
   foreignKey: "lockerId",
 });
+
+//Baskets foreign_key
+// db.basket.belongsTo(db.reserver, {
+//   through: "baskets",
+//   foreignKey: "reserverId",
+// });
 
 //User_roles foreign_key
 db.role.belongsToMany(db.user, {

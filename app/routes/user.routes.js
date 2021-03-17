@@ -9,18 +9,13 @@ module.exports = function (app) {
     );
     next();
   });
-
-  console.log(authJwt.isModerator);
   app.get("/api/all/", controller.allAccess);
-
   app.get("/api/user/", [authJwt.verifyToken], controller.userBoard);
-
   app.get(
     "/api/mod/",
     [authJwt.verifyToken, authJwt.isModerator],
     controller.moderatorBoard
   );
-
   app.get(
     "/api/admin",
     [authJwt.verifyToken, authJwt.isAdmin],

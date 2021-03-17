@@ -19,20 +19,20 @@ db.sequelize.sync();
 const Role = db.role;
 
 //Clear all data in dataBase
-// db.sequelize.sync({ force: true }).then(() => {
-// console.log("Drop and Resync Db");
-// Role.create({
-//   id: 1,
-//   name: "user",
-// })
-// Role.create({
-//   id: 2,
-//   name: "moderator",
-// })
-// Role.create({
-//   id: 3,
-//   name: "admin",
-// })
+// db.sequelize.sync({ force: false }).then(() => {
+//   console.log("Drop and Resync Db");
+//   Role.create({
+//     id: 1,
+//     name: "user",
+//   });
+//   Role.create({
+//     id: 2,
+//     name: "moderator",
+//   });
+//   Role.create({
+//     id: 3,
+//     name: "admin",
+//   });
 // });
 
 app.get("/", (req, res) => {
