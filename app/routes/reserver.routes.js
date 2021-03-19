@@ -3,8 +3,11 @@ module.exports = (app) => {
   const basket = require("../controllers/basket.controller.js");
   let router = require("express").Router();
 
-  router.post("/", reserver.create);
   router.post("/basket", basket.create);
+  router.get("/baskets", basket.findAll);
+  router.get("/basket/:id", basket.findOne);
+
+  router.post("/", reserver.create);
   router.get("/", reserver.findAll);
   router.get("/:id", reserver.findOne);
   router.put("/:id", reserver.update);

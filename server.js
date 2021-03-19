@@ -52,9 +52,6 @@ require("./app/routes/locker_type.routes")(app);
 //location
 require("./app/routes/location.routes")(app);
 
-//code
-require("./app/routes/code.routes")(app);
-
 //reserver
 require("./app/routes/reserver.routes")(app);
 

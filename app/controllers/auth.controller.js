@@ -1,5 +1,8 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+const stripe = require("stripe")(process.env.API_KEY_STRIPE, {
+  maxNetworkRetries: 2,
+});
 const User = db.user;
 const Role = db.role;
 

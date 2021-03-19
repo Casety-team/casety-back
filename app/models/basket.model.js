@@ -7,6 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       code_unlock: Sequelize.INTEGER,
       code_secure: Sequelize.INTEGER,
+      paymentIntent: Sequelize.STRING,
       reserverId: Sequelize.INTEGER,
     },
     {
