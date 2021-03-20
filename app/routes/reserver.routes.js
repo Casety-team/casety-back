@@ -6,6 +6,7 @@ module.exports = (app) => {
   router.post("/basket", basket.create);
   router.get("/baskets", basket.findAll);
   router.get("/basket/:id", basket.findOne);
+  router.get("/unlock/:code", basket.unlock);
 
   router.post("/", reserver.create);
   router.get("/", reserver.findAll);

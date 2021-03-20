@@ -37,7 +37,6 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  //Verify value in URL
   const name = req.query.name;
   let condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
   Basket.findAll({ where: condition, raw: true })
@@ -73,4 +72,26 @@ exports.findOne = (req, res) => {
         message: error.message || "Error retrieving basket with id=" + id,
       });
     });
+};
+
+exports.unlock = async (req, res) => {
+  if (!req.params.code) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+    return;
+  }
+
+  const unlock = req.params.code;
+
+  const project = await Basket.findAll({ where: { code_unlock: unlock } }).then(
+    (items) => {
+      console.log(items.length);
+      if (items.length > 0) {
+        res.send(true);
+      } else {
+        res.send(false);
+      }
+    }
+  );
 };
