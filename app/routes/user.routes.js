@@ -1,5 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/user.controller");
+let router = require("express").Router();
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -21,4 +22,8 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+
+  app.get("/api/user/:id", controller.findOne);
+  app.put("/api/user/:id", controller.update);
+  app.delete("/api/user/:id", controller.delete);
 };
