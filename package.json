@@ -15,7 +15,8 @@
     "rest",
     "api",
     "bcryptjs",
-    "jsonwebtoken"
+    "jsonwebtoken",
+    "dotenv"
   ],
   "author": "",
   "license": "ISC",

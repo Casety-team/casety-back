@@ -5,9 +5,7 @@ const cors = require("cors");
 const app = express();
 
 let corsOptions = {
-  host: process.env.WEB_URL
-    ? process.env.WEB_URL.split(", ")
-    : "localhost:8080",
+  host: process.env.WEB_URL ? process.env.WEB_URL : "localhost:8080",
   optionsSuccessStatus: 200,
 };
 
