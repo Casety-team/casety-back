@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -5,8 +6,8 @@ const cors = require("cors");
 const app = express();
 
 let corsOptions = {
-  host: process.env.WEB_URL ? process.env.WEB_URL : "localhost:8080",
-  optionsSuccessStatus: 200,
+  host: process.env.WEB_URL,
+  port: 8080,
 };
 
 app.use(cors(corsOptions));
@@ -58,6 +59,7 @@ require("./app/routes/reserver.routes")(app);
 //shop
 require("./app/routes/shop.routes")(app);
 
-app.listen(() => {
-  console.log(`Server is running on port ${process.env.DB_HOST}.`);
+const PORT = process.env.SITE_PORT;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
