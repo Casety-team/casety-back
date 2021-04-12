@@ -1,5 +1,2 @@
-DS_Store
 node_modules/
-app/config/auth.config.js
-yarn.lock
 .env
