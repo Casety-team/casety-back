@@ -62,5 +62,5 @@ require("./app/routes/shop.routes")(app);
 
 const PORT = process.env.DB_PORT || 4545;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server is running on port ${process.env.DB_HOST}.`);
 });
