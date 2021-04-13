@@ -5,12 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
-let corsOptions = {
-  host: process.env.WEB_URL,
-  port: 8080,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -59,7 +54,9 @@ require("./app/routes/reserver.routes")(app);
 //shop
 require("./app/routes/shop.routes")(app);
 
-const PORT = process.env.SITE_PORT;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+const PORT = process.env.PORT || "4545";
+const IP = process.env.IP || "0.0.0.0";
+
+app.listen(PORT, IP, () => {
+  console.log(`Server is running on port ${PORT} and ip ${IP}.`);
 });
