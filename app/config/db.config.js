@@ -1,6 +1,8 @@
+const path = require("path");
 require("dotenv").config({
   path: path.resolve(process.cwd(), "../../.env"),
 });
+
 module.exports = {
   DB_HOST: process.env.DB_HOST,
   DB_PORT: process.env.DB_PORT,
