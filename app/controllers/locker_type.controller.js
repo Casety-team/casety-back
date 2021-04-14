@@ -62,6 +62,20 @@ exports.findOne = (req, res) => {
     });
 };
 
+exports.findOneName = (req, res) => {
+  const name = req.params.name;
+
+  Locker_type.findByPk(name)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: "Error retrieving locker_type with name=" + name,
+      });
+    });
+};
+
 exports.update = (req, res) => {
   const id = req.params.id;
 
