@@ -64,8 +64,7 @@ exports.findOne = (req, res) => {
 
 exports.findOneName = (req, res) => {
   const name = req.params.name;
-
-  Locker_type.findByPk(name)
+  Locker_type.findAll({ where: { name: { [Op.like]: `${name}` } } })
     .then((data) => {
       res.send(data);
     })
