@@ -8,8 +8,8 @@ const stripe = require("stripe")(process.env.API_KEY_STRIPE, {
 });
 
 exports.buy = async (req, res) => {
-  const YOUR_DOMAIN = `http://localhost:3000/buy/1/`;
-  const { nameProduct, unitAmount, quantity, idUser, reservationId } = req.body;
+  const { nameProduct, unitAmount, idUser, reservationId } = req.body;
+  const YOUR_DOMAIN = `http://api.casety.fr/`;
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -22,7 +22,7 @@ exports.buy = async (req, res) => {
           },
           unit_amount: unitAmount,
         },
-        quantity: quantity,
+        quantity: 1,
       },
     ],
     mode: "payment",
