@@ -58,7 +58,7 @@ exports.buy = async (req, res) => {
       reservationId,
       unitAmount,
       session.payment_intent,
-      tokenSessionPayement
+      test
     );
   }
   // res.json({ id: session.id });
