@@ -9,6 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.ENUM,
         values: ["false", "true"],
       },
+      marketToken: Sequelize.STRING,
       paymentIntent: Sequelize.STRING,
       reserverId: Sequelize.INTEGER,
     },

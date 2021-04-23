@@ -61,7 +61,7 @@ exports.buy = async (req, res) => {
       test
     );
   }
-  // res.json({ id: session.id });
+  res.json({ id: session.id });
 };
 
 const generecode = () => {
@@ -80,10 +80,10 @@ const insertbasket = (
     price: unitAmount,
     code_unlock: generecode(),
     code_secure: generecode(),
+    pay: false,
+    marketToken: test,
     paymentIntent: payment_intent,
     reserverId: reservationId,
-    token,
-    pay: false,
   };
   Basket.create(basket)
     .then((data) => {
