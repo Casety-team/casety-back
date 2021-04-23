@@ -3,6 +3,7 @@ module.exports = (app) => {
   let router = require("express").Router();
 
   router.post("/", shop.buy);
+  router.post("/success/:token", shop.verifPay);
 
   app.use("/stripe/charge", router);
 };
