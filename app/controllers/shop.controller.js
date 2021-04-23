@@ -25,6 +25,7 @@ exports.buy = async (req, res) => {
       );
     }
     console.log(result.join(""));
+    return result.join("");
   };
 
   var test = token(6);
