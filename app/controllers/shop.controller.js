@@ -30,6 +30,7 @@ exports.buy = async (req, res) => {
   const tokenSessionPayement = () => {
     return token(6);
   };
+  console.log(tokenSessionPayement);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -49,7 +50,7 @@ exports.buy = async (req, res) => {
     success_url: `https://api.casety.fr/api/stripe/success/${tokenSessionPayement}`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
-  console.log(tokenSessionPayement);
+
   // SAUVEGARDER TOKEN EN BDD
   // TODO: vérifier si création de la session a fonctionnée
   if (session.id) {
