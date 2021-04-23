@@ -15,7 +15,7 @@ db.sequelize.sync();
 const Role = db.role;
 
 //Clear all data in dataBase
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and Resync Db");
   Role.create({
     id: 1,
