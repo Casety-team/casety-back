@@ -49,7 +49,7 @@ exports.buy = async (req, res) => {
     success_url: `https://api.casety.fr/api/stripe/success/${tokenSessionPayement}`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
-
+  console.log(tokenSessionPayement);
   // SAUVEGARDER TOKEN EN BDD
   // TODO: vérifier si création de la session a fonctionnée
   if (session.id) {
