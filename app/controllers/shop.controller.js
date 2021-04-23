@@ -27,10 +27,8 @@ exports.buy = async (req, res) => {
     console.log(result.join(""));
   };
 
-  const tokenSessionPayement = () => {
-    return token(6);
-  };
-  console.log(tokenSessionPayement());
+  var test = token(6);
+  console.log(test);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -47,7 +45,7 @@ exports.buy = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://api.casety.fr/api/stripe/success/${tokenSessionPayement()}`,
+    success_url: `https://api.casety.fr/api/stripe/success/${test}`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
