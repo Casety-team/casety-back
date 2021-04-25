@@ -1,4 +1,5 @@
 require("dotenv").config();
+const http = require("http");
 const db = require("../models");
 const Basket = db.basket;
 const Op = db.Sequelize.Op;
@@ -8,28 +9,22 @@ const stripe = require("stripe")(process.env.API_KEY_STRIPE, {
 });
 
 exports.buy = async (req, res) => {
-  const { nameProduct, unitAmount, idUser, reservationId } = req.body;
+  const { nameProduct, unitAmount, userId, reservationId } = req.body;
   const YOUR_DOMAIN = `http://localhost:3000/buy`;
 
-  const token = (length) => {
-    var result = [];
-    var characters =
+  const getRandomString = (length) => {
+    var randomChars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
+    var result = "";
     for (var i = 0; i < length; i++) {
-      result.push(
-        characters.charAt(
-          Math.floor(Math.random() * charactersLength) +
-            Math.floor(100000 + Math.random() * 900000)
-        )
+      result += randomChars.charAt(
+        Math.floor(Math.random() * randomChars.length)
       );
     }
-    console.log(result.join(""));
-    return result.join("");
+    return result;
   };
 
-  var test = token(6);
-  console.log(test);
+  var test = getRandomString(6);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -46,7 +41,7 @@ exports.buy = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://api.casety.fr/api/stripe/success/${test}`,
+    success_url: `http://localhost:3000/api/stripe/success/${test}`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
@@ -54,7 +49,7 @@ exports.buy = async (req, res) => {
   // TODO: vérifier si création de la session a fonctionnée
   if (session.id) {
     insertbasket(
-      idUser,
+      userId,
       reservationId,
       unitAmount,
       session.payment_intent,
@@ -69,18 +64,18 @@ const generecode = () => {
 };
 
 const insertbasket = (
-  idUser,
+  userId,
   reservationId,
   unitAmount,
   payment_intent,
   test
 ) => {
   const basket = {
-    userId: idUser,
+    userId: userId,
     price: unitAmount,
     code_unlock: generecode(),
     code_secure: generecode(),
-    pay: false,
+    pay: "false",
     marketToken: test,
     paymentIntent: payment_intent,
     reserverId: reservationId,
@@ -98,9 +93,13 @@ const insertbasket = (
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
   const getTokenByURL = req.params.code;
+  const toekn = res;
+  console.log("getTokenByURL =>", getTokenByURL);
+  console.log("toekn =>", toekn);
   await Basket.findAll({
     where: { token: getTokenByURL },
   }).then((items) => {
-    console.log(items.length);
+    console.log(items);
+    console.log("items =>", items);
   });
 };

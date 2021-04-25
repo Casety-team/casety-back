@@ -73,6 +73,12 @@ db.basket.belongsTo(db.reserver, {
   foreignKey: "reserverId",
 });
 
+//Basket foreign_key [userId]
+db.basket.belongsTo(db.user, {
+  through: "baskets",
+  foreignKey: "userId",
+});
+
 //User_roles foreign_key [roleId, userId]
 db.role.belongsToMany(db.user, {
   through: "user_roles",

@@ -13,6 +13,8 @@ exports.create = (req, res) => {
 
   const locker = {
     name: req.body.name,
+    price: req.body.price,
+    to_rent: req.body.to_rent,
     locationId: req.body.locationId,
     locker_type_id: req.body.locker_type_id,
   };
@@ -22,7 +24,7 @@ exports.create = (req, res) => {
       res.send(data);
     })
     .catch((error) => {
-      res.Status(500).send({
+      res.status(500).send({
         message:
           error.message || "Some error occured while creating the locker",
       });

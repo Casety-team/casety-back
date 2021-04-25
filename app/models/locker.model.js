@@ -5,6 +5,13 @@ module.exports = (sequelize, Sequelize) => {
       name: {
         type: Sequelize.STRING,
       },
+      price: {
+        type: Sequelize.FLOAT,
+      },
+      to_rent: {
+        type: Sequelize.ENUM,
+        values: ["true", "false"],
+      },
     },
     {
       paranoid: true,

@@ -29,7 +29,7 @@ exports.create = (req, res) => {
       res.send(data);
     })
     .catch((error) => {
-      res.Status(500).send({
+      res.status(500).send({
         message:
           error.message || "Some error occured while creating the basket",
       });
