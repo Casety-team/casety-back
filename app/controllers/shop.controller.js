@@ -23,7 +23,7 @@ exports.buy = async (req, res) => {
     return result;
   };
 
-  var test = getRandomString(6);
+  var token = getRandomString(6);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -40,7 +40,7 @@ exports.buy = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://api.casety.fr/stripe/charge/success/${test}`,
+    success_url: `https://api.casety.fr/stripe/charge/success/${token}`,
     cancel_url: `https://api.casety.fr/stripe/charge/error/`,
   });
 
@@ -52,7 +52,7 @@ exports.buy = async (req, res) => {
       reservationId,
       unitAmount,
       session.payment_intent,
-      test
+      token
     );
   }
   res.json({ id: session.id });
@@ -103,8 +103,8 @@ exports.verifPay = async (req, res) => {
     Basket.update(test, {
       where: { marketToken: req.params.token },
     })
-      .then(() => {
-        res.json({ pay: true });
+      .then((item) => {
+        res.send(item);
       })
       .catch((error) => {
         res.status(500).send({

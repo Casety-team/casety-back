@@ -54,6 +54,9 @@ require("./app/routes/reserver.routes")(app);
 //shop
 require("./app/routes/shop.routes")(app);
 
+//blog
+require("./app/routes/blog.routes")(app);
+
 const PORT = process.env.PORT || "4545";
 const IP = process.env.IP || "0.0.0.0";
 

@@ -43,6 +43,12 @@ db.location = require("./location.model.js")(sequelize, Sequelize);
 //basket
 db.basket = require("./basket.model.js")(sequelize, Sequelize);
 
+//categorie
+db.categorie = require("./categorie.js")(sequelize, Sequelize);
+
+//article
+db.article = require("./article.js")(sequelize, Sequelize);
+
 //lockers foreign_key [locationId]
 db.locker.belongsTo(db.location, {
   through: "lockers",
@@ -77,6 +83,12 @@ db.basket.belongsTo(db.reserver, {
 db.basket.belongsTo(db.user, {
   through: "baskets",
   foreignKey: "userId",
+});
+
+//Categories foreign_key [categorieId]
+db.article.belongsTo(db.categorie, {
+  through: "articles",
+  foreignKey: "categorieId",
 });
 
 //User_roles foreign_key [roleId, userId]
