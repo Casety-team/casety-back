@@ -4,6 +4,7 @@ module.exports = (app) => {
 
   router.post("/", shop.buy);
   router.get("/success/:token", shop.verifPay);
+  router.get("/error/", shop.error);
 
   app.use("/stripe/charge", router);
 };

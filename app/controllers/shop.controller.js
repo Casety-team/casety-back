@@ -10,7 +10,6 @@ const stripe = require("stripe")(process.env.API_KEY_STRIPE, {
 
 exports.buy = async (req, res) => {
   const { nameProduct, unitAmount, userId, reservationId } = req.body;
-  const YOUR_DOMAIN = `http://localhost:3000/buy`;
 
   const getRandomString = (length) => {
     var randomChars =
@@ -41,8 +40,8 @@ exports.buy = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `http://localhost:3000/api/stripe/success/${test}`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    success_url: `https://api.casety.fr/api/stripe/success/${test}`,
+    cancel_url: `https:///api.casety.fr/stripe/error/`,
   });
 
   // SAUVEGARDER TOKEN EN BDD
@@ -92,14 +91,19 @@ const insertbasket = (
 // ROUTE /api/stripe/success/{token}
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
-  const getTokenByURL = req.params.code;
-  const toekn = res;
-  console.log("getTokenByURL =>", getTokenByURL);
-  console.log("toekn =>", toekn);
-  await Basket.findAll({
-    where: { token: getTokenByURL },
-  }).then((items) => {
-    console.log(items);
-    console.log("items =>", items);
-  });
+  res.send("Success page stripe");
+  // const getTokenByURL = req.params.code;
+  // const toekn = res;
+  // console.log("getTokenByURL =>", getTokenByURL);
+  // console.log("toekn =>", toekn);
+  // await Basket.findAll({
+  //   where: { token: getTokenByURL },
+  // }).then((items) => {
+  //   console.log(items);
+  //   console.log("items =>", items);
+  // });
+};
+
+exports.error = async (req, res) => {
+  res.send("error page stripe");
 };
