@@ -91,35 +91,14 @@ const insertbasket = (
 // ROUTE /api/stripe/success/{token}
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
-  Basket.findAll({
+  const project = await Basket.findOne({
     where: { marketToken: req.params.token },
-  })
-    .then((data) => {
-      res.send("Success: ", data);
-      // data.map(async (r) => {
-      // const test = await stripe.paymentIntents
-      //   .retrieve(r.paymentIntent)
-      //   .then((stripeData) => {
-      //     res.send([r, stripeData]);
-      //   });
-      // });
-    })
-    .catch((error) => {
-      res.status(500).send({
-        message: error.message || "Some error occured while retrieving baskets",
-      });
-    });
-
-  // const getTokenByURL = req.params.code;
-  // const toekn = res;
-  // console.log("getTokenByURL =>", getTokenByURL);
-  // console.log("toekn =>", toekn);
-  // await Basket.findAll({
-  //   where: { token: getTokenByURL },
-  // }).then((items) => {
-  //   console.log(items);
-  //   console.log("items =>", items);
-  // });
+  });
+  if (project === null) {
+    res.send("Not found!");
+  } else {
+    res.send(project.marketToken);
+  }
 };
 
 exports.error = async (req, res) => {
