@@ -2,8 +2,14 @@ module.exports = (sequelize, Sequelize) => {
   const Article = sequelize.define(
     "articles",
     {
-      name: {
+      title: {
         type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      text: {
+        type: Sequelize.TEXT,
       },
       categorieId: {
         type: Sequelize.INTEGER,
