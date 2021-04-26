@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     description: req.body.description,
     text: req.body.text,
     picture_url: req.body.picture_url,
+    categorieId: req.body.categorieId,
   };
 
   Article.create(article)
