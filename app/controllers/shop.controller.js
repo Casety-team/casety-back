@@ -97,7 +97,22 @@ exports.verifPay = async (req, res) => {
   if (project === null) {
     res.send("Not found!");
   } else {
-    res.send(project);
+    const test = {
+      pay: "true",
+    };
+    Basket.update(test, {
+      where: { marketToken: req.params.token },
+    })
+      .then(() => {
+        res.send({
+          message: "User was updated successfully.",
+        });
+      })
+      .catch((error) => {
+        res.status(500).send({
+          message: "Error updating User with Token=" + req.params.token,
+        });
+      });
   }
 };
 
