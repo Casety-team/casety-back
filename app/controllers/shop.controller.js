@@ -92,7 +92,7 @@ const insertbasket = (
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
   const token = req.params.token;
-  let condition = token ? { name: { [Op.like]: `%${token}%` } } : null;
+  let condition = token ? { marketToken: { [Op.like]: `%${token}%` } } : null;
 
   Basket.findAll({ where: condition, raw: true })
     .then((data) => {
