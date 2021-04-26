@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
       text: {
         type: Sequelize.TEXT,
       },
+      picture_url: {
+        type: Sequelize.STRING,
+      },
       categorieId: {
         type: Sequelize.INTEGER,
       },
