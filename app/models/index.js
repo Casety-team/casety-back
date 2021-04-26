@@ -44,10 +44,10 @@ db.location = require("./location.model.js")(sequelize, Sequelize);
 db.basket = require("./basket.model.js")(sequelize, Sequelize);
 
 //categorie
-db.categorie = require("./categorie.js")(sequelize, Sequelize);
+db.categorie = require("./categorie.model.js")(sequelize, Sequelize);
 
 //article
-db.article = require("./article.js")(sequelize, Sequelize);
+db.article = require("./article.model.js")(sequelize, Sequelize);
 
 //lockers foreign_key [locationId]
 db.locker.belongsTo(db.location, {
