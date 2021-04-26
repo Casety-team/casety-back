@@ -97,7 +97,7 @@ exports.verifPay = async (req, res) => {
   if (project === null) {
     res.send("Not found!");
   } else {
-    res.send(project.marketToken);
+    res.send(project);
   }
 };
 
