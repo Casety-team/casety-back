@@ -91,8 +91,7 @@ const insertbasket = (
 // ROUTE /api/stripe/success/{token}
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
-  const token = req.params.token;
-  res.send("TOKEN: ", token);
+  res.send("TOKEN: ", req.params.token);
 
   // Basket.findAll({ where: { marketToken: { [Op.eq]: token } } })
   //   .then((data) => {
@@ -110,7 +109,6 @@ exports.verifPay = async (req, res) => {
   //     message: error.message || "Some error occured while retrieving baskets",
   //   });
   // });
-
   // const getTokenByURL = req.params.code;
   // const toekn = res;
   // console.log("getTokenByURL =>", getTokenByURL);
