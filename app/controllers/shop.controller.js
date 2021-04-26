@@ -94,22 +94,22 @@ exports.verifPay = async (req, res) => {
   const token = req.params.token;
   res.send("TOKEN: ", token);
 
-  Basket.findAll({ where: { marketToken: { [Op.eq]: token } } })
-    .then((data) => {
-      res.send("Success: ", data);
-      // data.map(async (r) => {
-      // const test = await stripe.paymentIntents
-      //   .retrieve(r.paymentIntent)
-      //   .then((stripeData) => {
-      //     res.send([r, stripeData]);
-      //   });
-      // });
-    })
-    .catch((error) => {
-      res.status(500).send({
-        message: error.message || "Some error occured while retrieving baskets",
-      });
-    });
+  // Basket.findAll({ where: { marketToken: { [Op.eq]: token } } })
+  //   .then((data) => {
+  //     res.send("Success: ", data);
+  //     // data.map(async (r) => {
+  //     // const test = await stripe.paymentIntents
+  //     //   .retrieve(r.paymentIntent)
+  //     //   .then((stripeData) => {
+  //     //     res.send([r, stripeData]);
+  //     //   });
+  //     // });
+  //   })
+  // .catch((error) => {
+  //   res.status(500).send({
+  //     message: error.message || "Some error occured while retrieving baskets",
+  //   });
+  // });
 
   // const getTokenByURL = req.params.code;
   // const toekn = res;
