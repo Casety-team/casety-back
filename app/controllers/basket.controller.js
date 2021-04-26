@@ -36,27 +36,6 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
-  const name = req.query.name;
-  let condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
-  Basket.findAll({ where: condition, raw: true })
-    .then((data) => {
-      data.map(async (r) => {
-        console.log(r);
-        const test = await stripe.paymentIntents
-          .retrieve(r.paymentIntent)
-          .then((stripeData) => {
-            res.send([r, stripeData]);
-          });
-      });
-    })
-    .catch((error) => {
-      res.status(500).send({
-        message: error.message || "Some error occured while retrieving baskets",
-      });
-    });
-};
-
 exports.findOne = (req, res) => {
   const id = req.params.id;
   Basket.findByPk(id)
