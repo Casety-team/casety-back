@@ -94,7 +94,7 @@ exports.verifPay = async (req, res) => {
   const token = req.params.token;
   let condition = token ? { marketToken: { [Op.like]: `%${token}%` } } : null;
 
-  Basket.findAll({ where: condition, raw: true })
+  Basket.findAll({ where: condition })
     .then((data) => {
       res.send("Success: ", data);
       // data.map(async (r) => {
