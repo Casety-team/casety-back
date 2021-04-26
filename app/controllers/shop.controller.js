@@ -104,9 +104,7 @@ exports.verifPay = async (req, res) => {
       where: { marketToken: req.params.token },
     })
       .then(() => {
-        res.send({
-          message: "User was updated successfully.",
-        });
+        res.json({ pay: true });
       })
       .catch((error) => {
         res.status(500).send({
