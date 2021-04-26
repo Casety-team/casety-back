@@ -91,7 +91,9 @@ const insertbasket = (
 // ROUTE /api/stripe/success/{token}
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
-  Basket.findAll({ where: { marketToken: { [Op.eq]: req.params.token } } })
+  Basket.findAll({
+    where: { marketToken: { [Op.lt]: sequelize.col(req.params.token) } },
+  })
     .then((data) => {
       res.send("Success: ", data);
       // data.map(async (r) => {
