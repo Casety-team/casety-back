@@ -40,8 +40,8 @@ exports.buy = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://api.casety.fr/api/stripe/success/${test}`,
-    cancel_url: `https:///api.casety.fr/stripe/error/`,
+    success_url: `https://api.casety.fr/stripe/charge/success/${test}`,
+    cancel_url: `https://api.casety.fr/stripe/charge/error/`,
   });
 
   // SAUVEGARDER TOKEN EN BDD
