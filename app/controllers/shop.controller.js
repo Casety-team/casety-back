@@ -40,7 +40,7 @@ exports.buy = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://api.casety.fr/stripe/charge/success/?sc_checkout=success&sc_sid=${token}`,
+    success_url: `https://api.casety.fr/stripe/charge/success/${token}/?sc_checkout=success`,
     cancel_url: `https://api.casety.fr/stripe/charge/error/?sc_checkout=cancel`,
   });
 
@@ -92,7 +92,7 @@ const insertbasket = (
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
   const project = await Basket.findOne({
-    where: { marketToken: req.query.sc_sid },
+    where: { marketToken: req.params.sc_sid },
   });
   if (project === null) {
     res.send("Not found!");
@@ -101,14 +101,14 @@ exports.verifPay = async (req, res) => {
       pay: "true",
     };
     Basket.update(test, {
-      where: { marketToken: req.query.sc_sid },
+      where: { marketToken: req.params.sc_sid },
     })
       .then((item) => {
         res.send(item);
       })
       .catch((error) => {
         res.status(500).send({
-          message: "Error updating User with Token=" + req.query.sc_sid,
+          message: "Error updating User with Token=" + req.params.sc_sid,
         });
       });
   }
