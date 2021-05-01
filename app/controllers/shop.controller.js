@@ -8,7 +8,7 @@ const stripe = require("stripe")(process.env.API_KEY_STRIPE, {
   maxNetworkRetries: 2,
 });
 
-exports.findOneCode = (req, res) => {
+exports.findOneCode = async (req, res) => {
   if (!req.params.reserverId) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -18,15 +18,13 @@ exports.findOneCode = (req, res) => {
 
   const reserverId = req.params.reserverId;
 
-  const project = await Basket.findAll({ where: { id: reserverId } })
-  .then(
+  const project = await Basket.findAll({ where: { id: reserverId } }).then(
     (items) => {
-        if(items.pay == true){
-          res.send(items);
-        }
+      if (items.pay == true) {
+        res.send(items);
+      }
     }
-  )    
-
+  );
 };
 
 exports.buy = async (req, res) => {
