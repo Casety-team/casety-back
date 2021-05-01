@@ -22,6 +22,8 @@ exports.findOneCode = async (req, res) => {
     (items) => {
       if (items.pay == true) {
         res.send(items);
+      } else {
+        res.send("Une erreur c'est produite lors du paiement.");
       }
     }
   );
