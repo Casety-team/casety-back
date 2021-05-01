@@ -18,7 +18,7 @@ exports.findOneCode = async (req, res) => {
 
   const reserverId = req.params.reserverId;
 
-  await Basket.findAll({ where: { id: reserverId } })
+  await Basket.findAll({ where: { reserverId: reserverId } })
     .then((items) => {
       res.send(items);
     })
