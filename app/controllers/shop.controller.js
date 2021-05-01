@@ -18,13 +18,15 @@ exports.findOneCode = async (req, res) => {
 
   const reserverId = req.params.reserverId;
 
-  await Basket.findAll({ where: { id: reserverId } }).then((items) => {
-    if (items.dataValues.pay == "true") {
+  await Basket.findAll({ where: { id: reserverId } })
+    .then((items) => {
       res.send(items);
-    } else {
-      res.send("Une erreur c'est produite lors du paiement.");
-    }
-  });
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: "Error Get basket with id",
+      });
+    });
 };
 
 exports.buy = async (req, res) => {
