@@ -18,16 +18,13 @@ exports.findOneCode = async (req, res) => {
 
   const reserverId = req.params.reserverId;
 
-  const project = await Basket.findAll({ where: { id: reserverId } }).then(
-    (items) => {
-      console.log(items);
-      if (items.pay == "true") {
-        res.send(items);
-      } else {
-        res.send("Une erreur c'est produite lors du paiement.");
-      }
+  await Basket.findAll({ where: { id: reserverId } }).then((items) => {
+    if (items.dataValues.pay == "true") {
+      res.send(items);
+    } else {
+      res.send("Une erreur c'est produite lors du paiement.");
     }
-  );
+  });
 };
 
 exports.buy = async (req, res) => {
