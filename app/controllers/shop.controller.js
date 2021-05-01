@@ -20,6 +20,7 @@ exports.findOneCode = async (req, res) => {
 
   const project = await Basket.findAll({ where: { id: reserverId } }).then(
     (items) => {
+      console.log(items);
       if (items.pay == "true") {
         res.send(items);
       } else {
