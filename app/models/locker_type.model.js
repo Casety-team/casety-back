@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       name: {
         type: Sequelize.ENUM,
-        values: ["bikes", "lockers"],
+        values: ["bikes", "lockers", "suitcase"],
       },
       length: {
         type: Sequelize.INTEGER,

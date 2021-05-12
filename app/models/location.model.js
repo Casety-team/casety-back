@@ -32,6 +32,9 @@ module.exports = (sequelize, Sequelize) => {
       latitude: {
         type: Sequelize.STRING,
       },
+      picture_url: {
+        type: Sequelize.STRING,
+      },
     },
     {
       paranoid: true,

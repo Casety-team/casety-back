@@ -26,6 +26,14 @@ module.exports = (sequelize, Sequelize) => {
       zip: {
         type: Sequelize.STRING,
       },
+      terms: {
+        type: Sequelize.ENUM,
+        values: ["true", "false"],
+      },
+      newsletter: {
+        type: Sequelize.ENUM,
+        values: ["true", "false"],
+      },
     },
     {
       paranoid: true,
