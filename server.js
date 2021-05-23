@@ -1,14 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
 
 app.use(cors());
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: "50mb", extended: true }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const db = require("./app/models");
 db.sequelize.sync();
