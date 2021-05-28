@@ -91,13 +91,13 @@ const insertbasket = (
   test
 ) => {
   const basket = {
-    userId: userId,
     price: unitAmount,
     code_unlock: generecode(),
     code_secure: generecode(),
     pay: "false",
     marketToken: test,
     paymentIntent: payment_intent,
+    userId: userId,
     reserverId: reservationId,
   };
   Basket.create(basket)
