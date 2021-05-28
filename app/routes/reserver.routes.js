@@ -4,7 +4,7 @@ module.exports = (app) => {
   let router = require("express").Router();
 
   router.post("/basket", basket.create);
-  // router.get("/baskets", basket.findAll);
+  router.get("/baskets/:userId", basket.findAll);
   router.get("/basket/:id", basket.findOne);
   router.get("/unlock/:code", basket.unlock);
 
