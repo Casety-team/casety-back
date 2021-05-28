@@ -3,7 +3,6 @@ module.exports = (app) => {
   const basket = require("../controllers/basket.controller.js");
   let router = require("express").Router();
 
-  router.post("/basket", basket.create);
   router.get("/baskets/:userId", basket.findAll);
   router.get("/basket/:id", basket.findOne);
   router.get("/unlock/:code", basket.unlock);
