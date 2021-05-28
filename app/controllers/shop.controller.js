@@ -90,6 +90,7 @@ const insertbasket = (
   payment_intent,
   test
 ) => {
+  console.log(userId, reservationId, unitAmount, payment_intent, test);
   const basket = {
     price: unitAmount,
     code_unlock: generecode(),
