@@ -115,7 +115,7 @@ exports.verifPay = async (req, res) => {
   const project = await Basket.findOne({
     where: { marketToken: req.params.sc_sid },
   });
-  console.log(req.params);
+  console.log(res);
   if (project === null) {
     res.send("Not found!");
   } else {
