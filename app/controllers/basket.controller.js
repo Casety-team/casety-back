@@ -6,7 +6,8 @@ const Op = db.Sequelize.Op;
 const stripe = require("stripe")(process.env.API_KEY_STRIPE);
 
 exports.findAll = (req, res) => {
-  const userId = req.params.id;
+  const userId = req.params.userId;
+
   Basket.findAll({
     where: {
       userId: {
