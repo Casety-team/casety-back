@@ -90,7 +90,6 @@ const insertbasket = (
   payment_intent,
   test
 ) => {
-  console.log(userId, reservationId, unitAmount, payment_intent, test);
   const basket = {
     price: unitAmount,
     code_unlock: generecode(),
@@ -116,6 +115,7 @@ exports.verifPay = async (req, res) => {
   const project = await Basket.findOne({
     where: { marketToken: req.params.sc_sid },
   });
+  console.log(req.params);
   if (project === null) {
     res.send("Not found!");
   } else {
