@@ -22,6 +22,8 @@ exports.signup = (req, res) => {
     city: req.body.city,
     adress: req.body.adress,
     zip: req.body.zip,
+    terms: req.body.terms,
+    newsletters: req.body.newsletters,
   })
     .then((user) => {
       if (req.body.roles) {
