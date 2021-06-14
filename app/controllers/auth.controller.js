@@ -23,7 +23,7 @@ exports.signup = (req, res) => {
     adress: req.body.adress,
     zip: req.body.zip,
     terms: req.body.terms,
-    newsletters: req.body.newsletters,
+    newsletter: req.body.newsletter,
   })
     .then((user) => {
       if (req.body.roles) {
