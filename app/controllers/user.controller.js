@@ -32,6 +32,18 @@ exports.findOne = (req, res) => {
     });
 };
 
+exports.findAll = (req, res) => {
+  User.findAll()
+    .then(async (data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: error.message || "Error retrieving basket with id=" + id,
+      });
+    });
+};
+
 exports.update = (req, res) => {
   const id = req.params.id;
 

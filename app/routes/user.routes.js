@@ -23,6 +23,7 @@ module.exports = function (app) {
     controller.adminBoard
   );
 
+  app.get("/api/user/all/", [authJwt.verifyToken], controller.findOne);
   app.get("/api/user/:id", controller.findOne);
   app.put("/api/user/:id", controller.update);
   app.delete("/api/user/:id", controller.delete);
