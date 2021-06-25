@@ -67,3 +67,23 @@ exports.unlock = async (req, res) => {
     }
   });
 };
+
+exports.token = async (req, res) => {
+  if (!req.params.token) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+    return;
+  }
+
+  const token = req.params.token;
+
+  await Basket.findAll({ where: { marketToken: token } }).then((items) => {
+    console.log(items.length);
+    if (items.length > 0) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  });
+};
