@@ -59,7 +59,6 @@ exports.unlock = async (req, res) => {
   const unlock = req.params.code;
 
   await Basket.findAll({ where: { code_unlock: unlock } }).then((items) => {
-    console.log(items.length);
     if (items.length > 0) {
       res.send(true);
     } else {
@@ -79,9 +78,8 @@ exports.token = async (req, res) => {
   const token = req.params.token;
 
   await Basket.findAll({ where: { marketToken: token } }).then((items) => {
-    console.log(items.length);
     if (items.length > 0) {
-      res.send(true);
+      res.send(items);
     } else {
       res.send(false);
     }
