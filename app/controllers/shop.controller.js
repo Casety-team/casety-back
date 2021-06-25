@@ -140,7 +140,6 @@ exports.verifPay = async (req, res) => {
               message: "Error updating User with Token=" + token,
             });
           });
-        res.send("success");
       });
     requestInStripe;
   }
