@@ -125,10 +125,12 @@ exports.verifPay = async (req, res) => {
     const requestInStripe = await stripe.paymentIntents
       .retrieve(paymentIntent)
       .then((stripeData) => {
+        console.log(stripeData.charges);
+        console.log(stripeData.charges.map((e) => e.receipt_url));
         console.log(stripeData.charges.receipt_url);
         const test = {
           pay: "true",
-          link: stripeData.charges.receipt_url,
+          //link: stripeData.charges.receipt_url,
         };
         Basket.update(test, {
           where: { marketToken: token },
