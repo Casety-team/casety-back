@@ -127,13 +127,12 @@ exports.verifPay = async (req, res) => {
       .then((stripeData) => {
         const test = {
           pay: "true",
-          link: stripeData.charges.data.receipt_url,
+          link: stripeData.charges.data[0].receipt_url,
         };
         Basket.update(test, {
           where: { marketToken: token },
         })
           .then((item) => {
-            console.log(stripeData.charges.data.receipt_url);
             res.send(item);
           })
           .catch((error) => {
