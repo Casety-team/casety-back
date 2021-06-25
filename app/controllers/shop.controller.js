@@ -133,6 +133,7 @@ exports.verifPay = async (req, res) => {
           where: { marketToken: token },
         })
           .then((item) => {
+            console.log(stripeData.charges.data.receipt_url);
             res.send(item);
           })
           .catch((error) => {
