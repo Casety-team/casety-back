@@ -15,13 +15,8 @@ exports.findAll = (req, res) => {
       },
     },
   })
-    .then(async (data) => {
-      res.send(data);
-      // const requestInStripe = await stripe.paymentIntents
-      //   .retrieve(data.paymentIntent)
-      //   .then((stripeData) => {
-      //     res.send([data, stripeData]);
-      //   });
+    .then((data) => {
+      res.send([data]);
     })
     .catch((error) => {
       res.status(500).send({
