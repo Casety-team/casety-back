@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       marketToken: Sequelize.STRING,
       paymentIntent: Sequelize.STRING,
+      link: Sequelize.STRING,
       userId: Sequelize.INTEGER,
       reserverId: Sequelize.INTEGER,
     },

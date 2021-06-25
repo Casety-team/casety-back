@@ -112,27 +112,37 @@ const insertbasket = (
 // ROUTE /api/stripe/success/{token}
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
+  const { token } = req.params;
+  const { paymentIntent } = res.req.body;
+
   const project = await Basket.findOne({
-    where: { marketToken: req.params.token },
+    where: { marketToken: token },
   });
 
   if (project === null) {
     res.send("Not found!");
   } else {
-    const test = {
-      pay: "true",
-    };
-    Basket.update(test, {
-      where: { marketToken: req.params.token },
-    })
-      .then((item) => {
-        res.send(item);
-      })
-      .catch((error) => {
-        res.status(500).send({
-          message: "Error updating User with Token=" + req.params.token,
-        });
+    const requestInStripe = await stripe.paymentIntents
+      .retrieve(paymentIntent)
+      .then((stripeData) => {
+        const test = {
+          pay: "true",
+          link: stripeData.charges.receipt_url,
+        };
+        Basket.update(test, {
+          where: { marketToken: token },
+        })
+          .then((item) => {
+            res.send(item);
+          })
+          .catch((error) => {
+            res.status(500).send({
+              message: "Error updating User with Token=" + token,
+            });
+          });
+        res.send("success");
       });
+    requestInStripe;
   }
 };
 
