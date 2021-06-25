@@ -39,6 +39,7 @@ exports.findOne = (req, res) => {
         .then((stripeData) => {
           res.send([data, stripeData]);
         });
+      requestInStripe;
     })
     .catch((error) => {
       res.status(500).send({

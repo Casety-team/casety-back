@@ -28,6 +28,7 @@
     "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
+    "node-mailjet": "^3.3.4",
     "sequelize": "^6.3.5",
     "stripe": "^8.130.0"
   },

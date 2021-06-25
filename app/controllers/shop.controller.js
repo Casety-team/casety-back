@@ -113,9 +113,9 @@ const insertbasket = (
 // - Récupère le basket qui a le même token et on valide le paiement
 exports.verifPay = async (req, res) => {
   const project = await Basket.findOne({
-    where: { marketToken: req.params.sc_sid },
+    where: { marketToken: req.params.token },
   });
-  console.log(res);
+
   if (project === null) {
     res.send("Not found!");
   } else {
@@ -123,14 +123,14 @@ exports.verifPay = async (req, res) => {
       pay: "true",
     };
     Basket.update(test, {
-      where: { marketToken: req.params.sc_sid },
+      where: { marketToken: req.params.token },
     })
       .then((item) => {
         res.send(item);
       })
       .catch((error) => {
         res.status(500).send({
-          message: "Error updating User with Token=" + req.params.sc_sid,
+          message: "Error updating User with Token=" + req.params.token,
         });
       });
   }
