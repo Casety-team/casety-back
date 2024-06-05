@@ -1,4 +1,4 @@
-const stripe = require("stripe")("sk_test_51I6xfpGWsM2bVeofyFZIeZkKZzRvf1dFMVAGg8kbTFBCzVwMwDwBmltXp4kieQ1gsV7D0tkRrAixGuTkjTqtMWZa00P7efLinB");
+const stripe = require("stripe")("sk_test_id");
 
 exports.buy = async (req, res) => {
   let { amount, id } = req.body;
